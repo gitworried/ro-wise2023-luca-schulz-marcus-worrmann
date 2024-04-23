@@ -1,3 +1,8 @@
-*.o
-*.elf
-*.pdf
+*/build
+*/*.o
+*/*.elf
+*/*.bin
+*/*.pdf
+*/*.h.gch
+*/.*.c.swp
+*/.*.h.swp
