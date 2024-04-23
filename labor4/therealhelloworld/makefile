@@ -9,7 +9,7 @@ SRC = therealhelloworld.bin therealhelloworld.elf therealhelloworld.o usart.o he
 OBJ = head.o usart.o therealhelloworld.o
 
 # Phony targets
-.PHONY: all clean upload
+.PHONY: all clean upload doxygen
 
 # Default target
 all: $(SRC)
@@ -31,21 +31,27 @@ therealhelloworld.elf: $(OBJ)
 
 # Rules
 
-# rule head.s to head.o
+# Rule head.s to head.o
 head.o: head.S
 	arm-none-eabi-gcc $< -mcpu=cortex-m0 -mthumb -c -o $@
 
-#rule usart.c to usart.o
+# Rule usart.c to usart.o
 usart.o: usart.c
 	arm-none-eabi-gcc $< -mcpu=cortex-m4 -mthumb -c -o $@
 
-#rule therealhelloworld.c to therealhelloworld.o
+# Rule therealhelloworld.c to therealhelloworld.o
 therealhelloworld.elf: head.o usart.o therealhelloworld.o
 	$(CC) head.o usart.o therealhelloworld.o -mcpu=cortex-m0 -mthumb -nostartfiles -Wl,-Ttext=0x8000000 -o $@
 
+# Doxygen
+doxygen:
+	doxygen Doxyfile
+	cd latex && $(MAKE)
+	cp latex/refman.pdf ./Docu.pdf
 # Clean up
 clean:
 	rm $(SRC)
+	rm -rf latex html	
 
 # Upload binary to the device
 upload:
