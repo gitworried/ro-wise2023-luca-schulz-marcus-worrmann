@@ -1,5 +1,10 @@
-#ifndef THEREALHELLOWORLD_USART_H
-#define THEREALHELLOWORLD_USART_H
+/**
+ * @file usart.h
+ * @brief USART driver for USART2 peripheral.
+ */
+
+#ifndef USART_H
+#define USART_H
 
 #include <stdint.h>
 
@@ -32,4 +37,4 @@ void usart_putx(uint32_t val);
  * 
  */
 void usart_init();
-#endif // THEREALHELLOWORLD_USART_H
+#endif 

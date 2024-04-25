@@ -5,8 +5,8 @@ CFLAGS = -mcpu=cortex-m4 -mthumb -c
 LDFLAGS = -mcpu=cortex-m4 -mthumb -nostartfiles -Wl,-Ttext=0x8000000
 
 # Source and object files
-SRC = therealhelloworld.bin therealhelloworld.elf therealhelloworld.o usart.o head.o
-OBJ = head.o usart.o therealhelloworld.o
+SRC = stopwatch.bin stopwatch.elf stopwatch.o usart.o head.o utils.o blinky.o
+OBJ = utils.o blinky.o head.o usart.o stopwatch.o
 
 # Phony targets
 .PHONY: all clean upload doxygen
@@ -15,11 +15,11 @@ OBJ = head.o usart.o therealhelloworld.o
 all: $(SRC)
 
 # Binary file generation
-therealhelloworld.bin: therealhelloworld.elf
+stopwatch.bin: stopwatch.elf
 	$(OBJCOPY) -O binary -S $< $@
 
 # ELF file generation
-therealhelloworld.elf: $(OBJ)
+stopwatch.elf: $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@
 
 # Object file generation from assembly or C source
@@ -41,4 +41,4 @@ clean:
 
 # Upload binary to the device
 upload:
-	cp therealhelloworld.bin /media/$(USER)/NODE_L432KC
+	cp stopwatch.bin /media/$(USER)/NODE_L432KC

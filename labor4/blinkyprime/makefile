@@ -5,8 +5,8 @@ CFLAGS = -mcpu=cortex-m4 -mthumb -c
 LDFLAGS = -mcpu=cortex-m4 -mthumb -nostartfiles -Wl,-Ttext=0x8000000
 
 # Source and object files
-SRC = blinkyprime.bin blinkyprime.elf blinkyprime.o usart.o head.o
-OBJ = head.o usart.o blinkyprime.o
+SRC = blinkyprime.bin blinkyprime.elf blinkyprime.o usart.o head.o led.o
+OBJ = head.o usart.o blinkyprime.o led.o
 
 # Phony targets
 .PHONY: all clean upload doxygen
@@ -28,20 +28,6 @@ blinkyprime.elf: $(OBJ)
 
 %.o: %.c
 	$(CC) $< $(CFLAGS) -o $@
-
-# Rules
-
-# Rule head.s to head.o
-head.o: head.S
-	arm-none-eabi-gcc $< -mcpu=cortex-m0 -mthumb -c -o $@
-
-# Rule usart.c to usart.o
-usart.o: usart.c
-	arm-none-eabi-gcc $< -mcpu=cortex-m4 -mthumb -c -o $@
-
-# Rule blinkyprime.c to blinkyprime.o
-blinkyprime.elf: head.o usart.o blinkyprime.o
-	$(CC) head.o usart.o blinkyprime.o -mcpu=cortex-m0 -mthumb -nostartfiles -Wl,-Ttext=0x8000000 -o $@
 
 # Doxygen
 doxygen:
