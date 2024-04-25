@@ -3,8 +3,8 @@
  * @brief Header file for blinky implementation
  */
 
-#ifndef LED_H
-#define LED_H
+#ifndef BLINKY_H
+#define BLINKY_H
 
 #include <stdint.h>
 /**
@@ -110,4 +110,4 @@ void wfi()
 {
   __asm__ volatile("WFI" : : : "memory");
 }
-#endif /* LED_H */
+#endif /* BLINKY_H */
