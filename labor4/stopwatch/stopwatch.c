@@ -11,7 +11,7 @@ void _systick(void){
 
 void _start(){
 	usart_init();
-	init();
+	led_init();
 
 	int state = 0;
 	int waitForRelease = 0;

@@ -71,7 +71,7 @@ void clock_toggle()
   {
     clock_off();
     led_set(1);
-    setR(STK_VAL, 0, 0);
+    set_register(STK_VAL, 0, 0);
   }
   else
     clock_on();
