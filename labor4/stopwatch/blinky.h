@@ -106,8 +106,5 @@ void clock_toggle();
  * which causes the processor to stop executing instructions and conserve power
  * until an interrupt is received.
  */
-void wfi()
-{
-  __asm__ volatile("WFI" : : : "memory");
-}
+void wfi();
 #endif /* BLINKY_H */
